@@ -1,12 +1,6 @@
 package impl;
 
-import java.io.InputStream;
-
-import org.drools.core.io.impl.DescrResource;
-import org.drools.core.io.impl.ResourceFactoryServiceImpl;
 import org.kie.api.KieServices;
-import org.kie.api.builder.KieFileSystem;
-import org.kie.api.io.Resource;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
