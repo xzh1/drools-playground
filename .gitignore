@@ -1,3 +1,13 @@
+﻿*/bin/
+*/gen/
+*/build/
+
+*.classpath
+*.project
+
+*.properties
+*.bin
+
 # Compiled class file
 *.class
 

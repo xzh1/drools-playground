@@ -1,0 +1,15 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    droolsVersion = "7.1.0.Final"
+}
+
+dependencies {
+    compile "org.kie:kie-api:${droolsVersion}"
+	compile "org.drools:drools-core:${droolsVersion}"
+    compile "org.drools:drools-compiler:${droolsVersion}"
+}
