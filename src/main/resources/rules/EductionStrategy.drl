@@ -1,0 +1,43 @@
+package com.sample
+
+import java.util.List;
+import java.util.Date;
+
+global List articles;
+
+declare Article
+  name: String
+  tag: int
+  updateTime: Date
+end
+
+declare Customer
+  id: long @key
+  name : String
+  age : int
+  birthDay : Date
+end
+
+declare ResultPage
+  propensity: double
+  isEligiable: boolean
+end
+
+rule "Customer eligibility"
+    when
+        $c : Customer( $e : (age > 18))
+    then
+    	ResultPage sr1 = new ResultPage();
+    	sr1.setIsEligiable($e);
+    	sr1.setPropensity(0.87);
+    	insert(sr1);
+        System.out.println("pick an article for the customer " + $c.getName());
+end
+
+rule "Pick article"
+	when 
+	   ResultPage( $e : isEligiable, $p : propensity)
+   	   $a : Article(tag == 1, $e, $p > 0.5) from articles
+   	then
+       System.out.println( "The recommended article is " + $a.getName());
+end
