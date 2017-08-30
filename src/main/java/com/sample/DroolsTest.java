@@ -27,24 +27,24 @@ public class DroolsTest {
         	Object ce1 = customer.newInstance();
         	customer.set(ce1, "id", 123L);
         	customer.set(ce1, "age", 19);
-        	customer.set(ce1, "name", "Qingwen");
+        	customer.set(ce1, "name", "customer1");
         	
         	List<Object> articles = new ArrayList<> ();
         	
         	FactType article = kbase.getFactType("com.sample", "Article");
         	
             Object article1 = article.newInstance();
-            article.set(article1, "name", "结婚不如买房！");
+            article.set(article1, "name", "article1");
             article.set(article1, "tag", 0);
             articles.add(article1);
             
             Object article2 = article.newInstance();
-            article.set(article2, "name", "强行变道一时爽");
+            article.set(article2, "name", "article2");
             article.set(article2, "tag", 1);
             articles.add(article2);
             
             Object article3 = article.newInstance();
-            article.set(article3, "name", "这篇文章男人看了会沉默，女人看了会流泪");
+            article.set(article3, "name", "article3");
             article.set(article3, "tag", 2);
             articles.add(article3);
             
