@@ -1,5 +1,6 @@
 package com.sample;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,29 @@ public class DroolsTest {
         	Object ce1 = customer.newInstance();
         	customer.set(ce1, "id", 123L);
         	customer.set(ce1, "age", 19);
-        	customer.set(ce1, "name", "customer1");
+        	customer.set(ce1, "firstName", "Pendragon");
+        	customer.set(ce1, "lastName", "Arthur");
+        	
+        	List<Object> subscriptions = new ArrayList<> ();
+        	
+        	FactType subscription = kbase.getFactType("com.sample", "Subscription");
+        	
+        	Object sub1 = subscription.newInstance();
+        	subscription.set(sub1, "id", 1111L);
+        	subscription.set(sub1, "channel", "web");
+        	subscriptions.add(sub1);
+        	
+        	Object sub2 = subscription.newInstance();
+        	subscription.set(sub2, "id", 2222L);
+        	subscription.set(sub2, "channel", "phone");
+        	subscriptions.add(sub2);
+        	
+        	Object sub3 = subscription.newInstance();
+        	subscription.set(sub3, "id", 3333L);
+        	subscription.set(sub3, "channel", "post");
+        	subscriptions.add(sub3);
+        	
+        	customer.set(ce1, "subscriptions", subscriptions);
         	
         	List<Object> articles = new ArrayList<> ();
         	
@@ -49,7 +72,8 @@ public class DroolsTest {
             articles.add(article3);
             
             kSession.setGlobal("articles",articles);
-            kSession.insert(ce1);
+            kSession.setGlobal("customer",ce1);
+            //kSession.insert(ce1);
             kSession.fireAllRules();
         } catch (Throwable t) {
             t.printStackTrace();
