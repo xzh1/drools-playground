@@ -66,8 +66,8 @@ dialect "mvel"
 	   LocalVariables( $e : isEligiable, $p : propensity, $t : subscription.timeStamp)
    	   $a : Article(tag == 1, $e, $p > 0.5) from articles
    	then
-   	   $n = monthDifference($t, $a.updateTime);
-   	   $p = java.lang.Math.sin($p - $a.tag);
+   	   $n = monthDifference($t, $a.updateTime); // function call
+   	   $p = java.lang.Math.sin($p - $a.tag); // function call
    	   System.out.println( "Month difference is " + $n);
    	   System.out.println( "sin value is" + $p);
        System.out.println( "The recommended article is " + $a.getName());
