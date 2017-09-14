@@ -1,3 +1,5 @@
+// grammar: http://mvel.documentnode.com/
+
 package com.sample
 
 import java.util.List;
@@ -17,7 +19,7 @@ declare Customer
   age : int
   birthDay : Date
   subscriptions: List
-  sponsors: Map
+  stakeholders: Map
 end
 
 declare Subscription
@@ -31,6 +33,8 @@ declare LocalVariables
   propensity: double
   isEligiable: boolean
   subscription : Subscription
+  stakeholder : Customer
+  name : String
   channel: String
 end
 
@@ -44,15 +48,19 @@ dialect "mvel"
     	LocalVariables lv = new LocalVariables();
     	lv.isEligiable = customer.age > 18;
     	lv.propensity = 0.87;
-    	lv.subscription = customer.subscriptions[2];
+    	lv.subscription = customer.subscriptions[2]; // list access
     	lv.channel = lv.subscription.channel;
+    	lv.stakeholder = customer.stakeholders["wife"]; // group access
+    	lv.name = lv.stakeholder.lastName + " " + lv.stakeholder.firstName; // arithmatic opeartion
     	insert(lv);
     	$n = customer.lastName + " " + customer.firstName;
         System.out.println("pick an article for the customer " + $n);
+        System.out.println("his wife is " + lv.name);
         System.out.println("the subscription he had was from " + lv.channel);
 end
 
 rule "Pick article"
+dialect "mvel"
 	when 
 	   LocalVariables( $e : isEligiable, $p : propensity)
    	   $a : Article(tag == 1, $e, $p > 0.5) from articles
