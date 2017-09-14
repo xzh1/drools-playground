@@ -49,7 +49,7 @@ dialect "mvel"
     	lv.isEligiable = customer.age > 18;
     	lv.propensity = 0.87;
     	lv.subscription = customer.subscriptions[2]; // list access
-    	lv.channel = lv.subscription.channel;
+    	lv.channel = lv.subscription.?channel; // null safe check opeartor
     	lv.stakeholder = customer.stakeholders["wife"]; // group access
     	lv.name = lv.stakeholder.lastName + " " + lv.stakeholder.firstName; // arithmatic opeartion
     	insert(lv);
